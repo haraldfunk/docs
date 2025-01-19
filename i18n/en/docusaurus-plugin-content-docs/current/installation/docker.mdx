@@ -48,7 +48,7 @@ There are several ways to create this:
 
 The evcc Docker container needs two volumes:
 
-- `/etc/evcc.yaml` for the configuration file
+- `/app/evcc.yaml` for the configuration file
 - `/root/.evcc/` directory for the internal SQLite database. The database is automatically stored in this directory.
 
 Create these directories on your host system.
@@ -73,7 +73,7 @@ Here are the relevant details you need to enter:
 
 | Host Path              | Container Path   | Description                    |
 |------------------------|------------------|--------------------------------|
-| `/home/user/evcc.yaml` | `/etc/evcc.yaml` | Configuration file             |
+| `/home/user/evcc.yaml` | `/app/evcc.yaml` | Configuration file             |
 | `/home/user/.evcc/`    | `/root/.evcc`    | Directory for internal database|
 
 #### Ports {#ports}
@@ -114,7 +114,7 @@ Whether you need `sudo` depends on your system.
 
 ```sh
 sudo docker run -d --name evcc \
--v /home/user/evcc.yaml:/etc/evcc.yaml \
+-v /home/user/evcc.yaml:/app/evcc.yaml \
 -v /home/user/.evcc:/root/.evcc \
 -p 7070:7070 \
 -p 8887:8887 \
@@ -126,7 +126,7 @@ evcc/evcc:latest
 
 ```sh
 sudo docker run -d --name evcc \
--v /home/user/evcc.yaml:/etc/evcc.yaml \
+-v /home/user/evcc.yaml:/app/evcc.yaml \
 -v /home/user/.evcc:/root/.evcc \
 -p 7070:7070 \
 -p 8887:8887 \
@@ -175,7 +175,7 @@ services:
       - 7070:7070/tcp
       - 8887:8887/tcp
     volumes:
-      - /home/user/evcc.yaml:/etc/evcc.yaml
+      - /home/user/evcc.yaml:/app/evcc.yaml
       - /home/user/.evcc:/root/.evcc
     restart: unless-stopped
 ```
@@ -196,7 +196,7 @@ services:
       - 9522:9522/udp
       - 4712:4712/tcp
     volumes:
-      - /home/user/evcc.yaml:/etc/evcc.yaml
+      - /home/user/evcc.yaml:/app/evcc.yaml
       - /home/user/.evcc:/root/.evcc
       - /etc/machine-id:/etc/machine-id
       - /var/lib/dbus/machine-id:/var/lib/dbus/machine-id
